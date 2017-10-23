@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Router Examples</title>
+
+    <style>
+    #page-loader
+    {
+        position:fixed;
+        bottom:25px;
+        right:30px;
+        background-color:rgb(0,150,255);
+        color:white;
+        font-family:'Roboto';
+        padding:10px 15px;
+        border-radius:25px;
+        font-weight:bold;
+    }
+
+    #link-container
+    {
+        margin-bottom:25px;
+    }
+
+    #link-container a
+    {
+        display:inline-block;
+        padding:5px 10px;
+        margin:5px;
+    }
+    </style>
+
+</head>
+<body>
+    <div id="page-loader">Loading...</div>
+    
+    <div id="link-container">
+        <a href="#index">Go to Homepage</a>
+        <a href="#deliver">Hello world</a>
+    </div>
+
+    <div id="message-display"></div>
+    
+    <script type="text/javascript" src="router.js"></script>
+</body>
+</html>
