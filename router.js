@@ -31,8 +31,10 @@ var ccrouter = function()
     var percent = 0; // Percentage of the completion of the loading of the page
     
     // Initializes the ccrouter instance with routes_directory, and extension for the web documents
-    this.initialize = function(routes_dir, ext)
+    this.initialize = function(routes_dir, ext, color)
     {
+        getLoaderHTML(color);
+
         display = document.getElementById("message-display");
         page_loader = document.getElementById("page-loader");
         routes_directory = routes_dir; // Set the routes directory
@@ -40,6 +42,11 @@ var ccrouter = function()
         httpd = http(); // Initialize a new HTTP object
 
         page_loader.style.opacity = "0"; // Hide the page_loader 
+    }
+
+    var getLoaderHTML = function(color)
+    {
+        document.write('<div id="page-loader" style="display:block;opacity:1;position:fixed;width:100%;top:0;left:0;height:1px;background-color:white;transition:all 500ms;"><div id="loading-bar" class="bloom" style="width:0%;height:1px;background-color:' + color + ';transition:all 500ms;"></div></div>');
     }
     
     // Listens for hashchange events and refreshes the page
@@ -118,5 +125,5 @@ var ccrouter = function()
 }
 
 var router = ccrouter();  // Create a new router from ccrouter
-router.initialize("Routes/", "html"); // Map the change of hashes to the router
+router.initialize("Routes/", "html", "red"); // Map the change of hashes to the router
 router.listen(); // Listen for the incoming hashchanges
