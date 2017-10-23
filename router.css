@@ -1,0 +1,11 @@
+#loading-bar.bloom
+{
+    animation: 2s bloomingAnimation infinite;
+}
+
+@keyframes bloomingAnimation
+{
+    0% { box-shadow: 0 0 10px rgba(0,150,255, 0); opacity: 0.4 }
+    50% { box-shadow: 0 0 10px rgba(0,150,255, 0.8); opacity: 1 }
+    100% { box-shadow: 0 0 10px rgba(0,150,255, 0) ; opacity: 0.4 }
+}
