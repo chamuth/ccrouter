@@ -29,9 +29,15 @@ var ccrouter = function()
     var extension = ""; // Extension of the routes files
     var httpd = null; // The HTTP request client for JavaScript 
     var percent = 0; // Percentage of the completion of the loading of the page
+
+    // A Preprocessor for the html content
+    var preprocessor = function(content)
+    {
+        return content;   
+    }
     
     // Initializes the ccrouter instance with routes_directory, and extension for the web documents
-    this.initialize = function(routes_dir, ext, color)
+    this.initialize = function(routes_dir, ext, color, preproc = null)
     {
         getLoaderHTML(color);
 
@@ -42,6 +48,8 @@ var ccrouter = function()
         httpd = http(); // Initialize a new HTTP object
 
         page_loader.style.opacity = "0"; // Hide the page_loader 
+
+        if (preproc) preprocessor = preproc; // Set the preprocessor
     }
 
     var getLoaderHTML = function(color)
@@ -62,16 +70,17 @@ var ccrouter = function()
     // Loads a url and returns the HTML content from it
     var load = function(url)
     {
-        loader(true);
+        loader(true); // Show the preloader
 
         setTimeout(function() {
         httpd.GET(url, {
             complete: function(response) {
-                loader(false);
-                display.innerHTML = response; // display the response in the display element described before
+                loader(false); // Hide the preloader
+                var processedResponse = preprocessor(response); // Preprocess the response
+                display.innerHTML = processedResponse; // Display the response
             },
             error : function() {
-                loader(false);
+                loader(false); // Hide the preloader 
                 console.error("Route cannot be loaded. Please make sure the file, \"" + url + "\" exists in your file system"); // Display the error
             }
         });
@@ -123,7 +132,3 @@ var ccrouter = function()
     
     return this;
 }
-
-var router = ccrouter();  // Create a new router from ccrouter
-router.initialize("Routes/", "html", "red"); // Map the change of hashes to the router
-router.listen(); // Listen for the incoming hashchanges

@@ -20,11 +20,11 @@
     }
     </style>
 
+    <!-- ADD THE CCROUTER SOURCE FILES -->
     <link rel="stylesheet" href="router.css"/>
+    <script type="text/javascript" src="router.js"></script>
 </head>
 <body>
-
-    <script type="text/javascript" src="router.js"></script>
    
     <div id="link-container">
         <a href="#index">Go to Homepage</a>
@@ -32,6 +32,11 @@
     </div>
 
     <div id="message-display"></div>
-    
+
+    <script type="text/javascript">
+        var router = ccrouter();  // Create a new router from ccrouter
+        router.initialize("Routes/", "html", "red"); // Map the change of hashes to the router
+        router.listen(); // Listen for the incoming hashchanges
+    </script>
 </body>
 </html>

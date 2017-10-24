@@ -7,3 +7,6 @@ CCRouter is a Mini-framework for Front-end developers to create responsive and a
 ## Features of CCRouter
 * Customizable colors
 * Built-in animated Google-like progress bar on top
+
+## How it's working
+1. First add 
