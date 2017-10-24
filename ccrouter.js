@@ -20,6 +20,18 @@ var http = function()
     return this;
 }
 
+// Animatron v1.0 : Used for animations
+var animatron = {
+    fadeIn = function(element)
+    {
+        
+    },
+    fadeOut = function(element)
+    {
+
+    }
+}
+
 // CCRouter for Front-end routing on steroids (v1.0)
 var ccrouter = function()
 {
@@ -37,11 +49,11 @@ var ccrouter = function()
     }
     
     // Initializes the ccrouter instance with routes_directory, and extension for the web documents
-    this.initialize = function(routes_dir, ext, color, preproc = null)
+    this.initialize = function(routes_dir, ext, properties, preproc = null)
     {
-        getLoaderHTML(color);
+        getLoaderHTML(properties);
 
-        display = document.getElementById("message-display");
+        display = document.getElementById("display");
         page_loader = document.getElementById("page-loader");
         routes_directory = routes_dir; // Set the routes directory
         extension = ext; // Initialize the extension
@@ -52,11 +64,10 @@ var ccrouter = function()
         if (preproc) preprocessor = preproc; // Set the preprocessor
     }
 
-    var getLoaderHTML = function(color)
+    var getLoaderHTML = function(properties)
     {
-        document.write('<div id="page-loader" style="display:block;opacity:1;position:fixed;width:100%;top:0;left:0;height:1px;background-color:white;transition:all 500ms;"><div id="loading-bar" class="bloom" style="width:0%;height:1px;background-color:' + color + ';transition:all 500ms;"></div></div>');
-    }
-    
+        document.write('<div id="page-loader" style="display:block;opacity:1;position:fixed;width:100%;top:0;left:0;height:' + properties.height + 'px;background-color:white;transition:all 500ms;"><div id="loading-bar" class="bloom" style="width:0%; box-shadow: 0 0 10px ' + properties.color + ';height:' + properties.height + 'px;background-color:' + properties.color + ';transition:all 500ms;"></div></div>');
+    }    
     // Listens for hashchange events and refreshes the page
     this.listen = function()
     {

@@ -7,6 +7,11 @@
     <title>Router Examples</title>
 
     <style>
+    *
+    { 
+        font-family:'Roboto'; 
+    }
+
     #link-container
     {
         margin-bottom:25px;
@@ -17,6 +22,14 @@
         display:inline-block;
         padding:5px 10px;
         margin:5px;
+        text-decoration:none;
+        color:dodgerblue;
+    }
+
+    #link-container a:hover
+    {
+        background-color:#eee;
+        color:black;
     }
     </style>
 
@@ -31,11 +44,16 @@
         <a href="#deliver">Hello world</a>
     </div>
 
-    <div id="message-display"></div>
+    <div id="display" class="fullscreen"></div>
 
     <script type="text/javascript">
         var router = ccrouter();  // Create a new router from ccrouter
-        router.initialize("Routes/", "html", "red"); // Map the change of hashes to the router
+
+        router.initialize("Routes/", "html", {
+            color:  "red",
+            height: "2"
+        }); 
+        // Map the change of hashes to the router
         router.listen(); // Listen for the incoming hashchanges
     </script>
 </body>

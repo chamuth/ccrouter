@@ -5,7 +5,15 @@
 
 @keyframes bloomingAnimation
 {
-    0% { box-shadow: 0 0 10px; opacity: 0.4 }
-    50% { box-shadow: 0 0 10px; opacity: 1 }
-    100% { box-shadow: 0 0 10px; opacity: 0.4 }
+    0% { opacity: 0.4 }
+    50% { opacity: 1 }
+    100% { opacity: 0.4 }
+}
+
+#display.fullscreen
+{
+    top:0;
+    left:0;
+    position:absolute;
+    width:100%;
 }
