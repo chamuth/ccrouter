@@ -54,7 +54,7 @@ var ccrouter = function()
 
     var getLoaderHTML = function(properties)
     {
-        document.write('<div id="page-loader" style="display:block;opacity:1;position:fixed;width:100%;top:0;left:0;height:' + properties.height + 'px;background-color:white;transition:all 500ms;"><div id="loading-bar" class="bloom" style="width:0%; box-shadow: 0 0 10px ' + properties.color + ';height:' + properties.height + 'px;background-color:' + properties.color + ';transition:all 500ms;"></div></div>');
+        document.write('<div id="page-loader" style="display:block;opacity:1;position:fixed;width:100%;top:0;left:0;height:' + properties.height + 'px;background-color:white;transition:all 500ms;"><div id="loading-bar" class="bloom" style="width:0%;height:' + properties.height + 'px;background-color:' + properties.color + ';transition:all 500ms;"></div></div>');
     }    
     // Listens for hashchange events and refreshes the page
     this.listen = function()
@@ -77,7 +77,7 @@ var ccrouter = function()
     // Loads a url and returns the HTML content from it
     var load = function(url)
     {
-        fadeDisplay(true); // Fade out the display
+        fadeDisplay(false); // Fade out the display
         loader(true); // Show the preloader
 
         setTimeout(function() {
@@ -87,13 +87,13 @@ var ccrouter = function()
                 var processedResponse = preprocessor(response); // Preprocess the response
                 display.innerHTML = processedResponse; // Display the response
 
-                fadeDisplay(false); // Fade the display back in
+                fadeDisplay(true); // Fade the display back in
             },
             error : function() {
                 loader(false); // Hide the preloader 
                 console.error("Route cannot be loaded. Please make sure the file, \"" + url + "\" exists in your file system"); // Display the error
 
-                fadeDisplay(false); // Fade the display back in
+                fadeDisplay(true); // Fade the display back in
             }
         });
         }, 500);
