@@ -1,0 +1,25 @@
+{
+  "name": "CCRouter",
+  "authors": [
+    "Chamuth Chamandana <c.chamandana@gmail.com>"
+  ],
+  "description": "CCRouter is a micro front-end routing framework for web developers",
+  "main": "",
+  "keywords": [
+    "router",
+    "framework",
+    "front-end",
+    "preloader",
+    "loading",
+    "load"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.github.com/Chamuth/ccrouter",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
