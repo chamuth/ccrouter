@@ -20,18 +20,6 @@ var http = function()
     return this;
 }
 
-// Animatron v1.0 : Used for animations
-var animatron = {
-    fadeIn = function(element)
-    {
-        
-    },
-    fadeOut = function(element)
-    {
-
-    }
-}
-
 // CCRouter for Front-end routing on steroids (v1.0)
 var ccrouter = function()
 {
@@ -77,10 +65,19 @@ var ccrouter = function()
             load(routes_directory + hash + "." + extension);
         }
     }
+
+    var fadeDisplay = function(out)
+    {
+        if (out) 
+            display.classList.remove("faded"); // Remove the fading
+        else
+            display.classList.add("faded"); // Remove the fading    
+    }
     
     // Loads a url and returns the HTML content from it
     var load = function(url)
     {
+        fadeDisplay(true); // Fade out the display
         loader(true); // Show the preloader
 
         setTimeout(function() {
@@ -89,10 +86,14 @@ var ccrouter = function()
                 loader(false); // Hide the preloader
                 var processedResponse = preprocessor(response); // Preprocess the response
                 display.innerHTML = processedResponse; // Display the response
+
+                fadeDisplay(false); // Fade the display back in
             },
             error : function() {
                 loader(false); // Hide the preloader 
                 console.error("Route cannot be loaded. Please make sure the file, \"" + url + "\" exists in your file system"); // Display the error
+
+                fadeDisplay(false); // Fade the display back in
             }
         });
         }, 500);

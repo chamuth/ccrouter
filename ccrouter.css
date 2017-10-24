@@ -17,3 +17,14 @@
     position:absolute;
     width:100%;
 }
+
+#display
+{
+    opacity:1;
+    transition:all 500ms;
+}
+
+#display.faded
+{
+    opacity:0;
+}
