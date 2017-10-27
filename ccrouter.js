@@ -50,6 +50,14 @@ var ccrouter = function()
         page_loader.style.opacity = "0"; // Hide the page_loader 
 
         if (preproc) preprocessor = preproc; // Set the preprocessor
+
+        loadDefault(properties); // Load the default route
+    }
+
+    var loadDefault = function(prop)
+    {
+        var defaultRoute = prop.initial;
+        load(routes_directory + defaultRoute + "." + extension);
     }
 
     var getLoaderHTML = function(properties)
@@ -87,13 +95,17 @@ var ccrouter = function()
                 var processedResponse = preprocessor(response); // Preprocess the response
                 display.innerHTML = processedResponse; // Display the response
 
-                fadeDisplay(true); // Fade the display back in
+                setTimeout(function() {
+                    fadeDisplay(true); // Fade the display back in
+                }, 500);
             },
             error : function() {
                 loader(false); // Hide the preloader 
                 console.error("Route cannot be loaded. Please make sure the file, \"" + url + "\" exists in your file system"); // Display the error
 
-                fadeDisplay(true); // Fade the display back in
+              setTimeout(function() {
+                    fadeDisplay(true); // Fade the display back in
+                }, 500);
             }
         });
         }, 500);
