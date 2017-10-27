@@ -51,7 +51,10 @@ var ccrouter = function()
 
         if (preproc) preprocessor = preproc; // Set the preprocessor
 
-        loadDefault(properties); // Load the default route
+        if (window.location.hash == "")
+            loadDefault(properties); // Load the default route
+        else 
+            load(routes_directory + window.location.hash.replace("#", "") + "." + extension);
     }
 
     var loadDefault = function(prop)
@@ -85,6 +88,7 @@ var ccrouter = function()
     // Loads a url and returns the HTML content from it
     var load = function(url)
     {
+        console.log
         fadeDisplay(false); // Fade out the display
         loader(true); // Show the preloader
 
