@@ -7,14 +7,51 @@
     <title>Router Examples</title>
 
     <style>
+
+    body
+    {
+        background-color:dodgerblue;
+    }
+
+    .container
+    {
+        background-color:dodgerblue;
+        width:100%;
+        max-width:100%;
+        z-index:0;
+
+        color:white;
+    }
+
+    .container a
+    {
+        color:#eee !important;
+    }
+
+    .more-links
+    {
+        padding-top:25px !important;
+    }
+
+    .padder
+    {
+        padding-top:50px;
+        padding-left:50px;
+        padding-bottom:50px;
+    }
+
     *
     { 
         font-family:'Roboto'; 
+        margin: 0 !important;
     }
 
     #link-container
     {
+        background-color:white;
+        width:100%;
         margin-bottom:25px;
+        z-index:1000;
     }
 
     #link-container a
@@ -49,6 +86,7 @@
         <a href="#videos">Show videos</a>
         <a href="#disqus">Disqus Discussion</a>
         <a href="#Directory/inside">Inside a directory</a>
+        <a href="#Directory/images">Images inside a directory</a>
     </div>
 
     <div id="display"></div>
