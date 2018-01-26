@@ -52,9 +52,16 @@ var ccrouter = function()
         if (preproc) preprocessor = preproc; // Set the preprocessor
 
         if (window.location.hash == "")
+        {
             loadDefault(properties); // Load the default route
+        }
         else 
-            load(routes_directory + window.location.hash.replace("#", "") + "." + extension);
+        {
+            if (extension == "")
+                load(routes_directory + window.location.hash.replace("#", ""));
+            else
+                load(routes_directory + window.location.hash.replace("#", "") + "." + extension);
+        }
     }
 
     var loadDefault = function(prop)
