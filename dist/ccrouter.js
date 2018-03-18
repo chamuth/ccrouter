@@ -60,8 +60,6 @@ var ccrouter = function()
         else 
         {
             var hasher =  window.location.hash.replace("#", "");
-            resetTabContent(); // reset the tabs
-            $("a[href='#" + hasher + "'").find(".dashboard-tab").addClass("active");
 
             if (ext === "")
             {
