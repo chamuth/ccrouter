@@ -37,7 +37,7 @@ var ccrouter = function()
     }
     
     // Initializes the ccrouter instance with routes_directory, and extension for the web documents
-    this.initialize = function(routes_dir, ext, properties, preproc = null)
+    this.initialize = function(routes_dir, ext, properties, preproc = null, refresh = null)
     {
         getLoaderHTML(properties);
 
@@ -45,6 +45,8 @@ var ccrouter = function()
         page_loader = document.getElementById("page-loader");
         routes_directory = routes_dir; // Set the routes directory
         extension = ext; // Initialize the extension
+        refreshPages = refresh; // Initialize the refresh pages
+
         httpd = http(); // Initialize a new HTTP object
 
         page_loader.style.opacity = "0"; // Hide the page_loader 
@@ -57,30 +59,58 @@ var ccrouter = function()
         }
         else 
         {
-            if (extension == "")
-                load(routes_directory + window.location.hash.replace("#", ""));
+            var hasher =  window.location.hash.replace("#", "");
+            resetTabContent(); // reset the tabs
+            $("a[href='#" + hasher + "'").find(".dashboard-tab").addClass("active");
+
+            if (ext === "")
+            {
+                load(routes_directory + hasher);
+            }
             else
-                load(routes_directory + window.location.hash.replace("#", "") + "." + extension);
+            {
+                load(routes_directory + hasher + "." + extension);
+            }
         }
     }
 
     var loadDefault = function(prop)
     {
         var defaultRoute = prop.initial;
-        load(routes_directory + defaultRoute + "." + extension);
+
+        if (extension !== "")
+        {
+            load(routes_directory + defaultRoute + "." + extension);
+        }else{
+            load(routes_directory + defaultRoute);
+        }
     }
 
     var getLoaderHTML = function(properties)
     {
         document.write('<div id="page-loader" style="display:block;opacity:1;position:fixed;width:100%;top:0;left:0;height:' + properties.height + 'px;background-color:white;transition:all 500ms;"><div id="loading-bar" class="bloom" style="width:0%;height:' + properties.height + 'px;background-color:' + properties.color + ';transition:all 500ms;"></div></div>');
     }    
+
+
+    var $dashboard_tabs = $(".dashboard-tab");
+    var resetTabContent = function()
+    {
+        $dashboard_tabs.removeClass("active");
+    }
+
     // Listens for hashchange events and refreshes the page
     this.listen = function()
     {
         window.onhashchange = function(e)
         {
+            resetTabContent(); // reset the tabs
             var hash = e.newURL.split('#')[1];
-            load(routes_directory + hash + "." + extension);
+            $("a[href='#" + hash + "'").find(".dashboard-tab").addClass("active");
+
+            if (extension == "")
+                load(routes_directory + hash);
+            else
+                load(routes_directory + hash + "." + extension);
         }
     }
 
@@ -91,34 +121,36 @@ var ccrouter = function()
         else
             display.classList.add("faded"); // Remove the fading    
     }
+
+    // Function which should be called right after visiting another route
+    var refreshPages = null;
     
     // Loads a url and returns the HTML content from it
     var load = function(url)
     {
-        console.log
         fadeDisplay(false); // Fade out the display
         loader(true); // Show the preloader
 
         setTimeout(function() {
-        httpd.GET(url, {
-            complete: function(response) {
-                loader(false); // Hide the preloader
-                var processedResponse = preprocessor(response); // Preprocess the response
-                display.innerHTML = processedResponse; // Display the response
+            httpd.GET(url, {
+                complete: function(response) {
+                    loader(false); // Hide the preloader
+                    var processedResponse = preprocessor(response); // Preprocess the response
+                    display.innerHTML = processedResponse; // Display the response
 
-                setTimeout(function() {
-                    fadeDisplay(true); // Fade the display back in
-                }, 500);
-            },
-            error : function() {
-                loader(false); // Hide the preloader 
-                console.error("Route cannot be loaded. Please make sure the file, \"" + url + "\" exists in your file system"); // Display the error
-
-              setTimeout(function() {
-                    fadeDisplay(true); // Fade the display back in
-                }, 500);
-            }
-        });
+                    refreshPages(url); // Activate the refresh function 
+                    
+                    setTimeout(function() {
+                        fadeDisplay(true); // Fade the display back in
+                    }, 1000);
+                },
+                error : function() {
+                    loader(false); // Hide the preloader 
+                  setTimeout(function() {
+                        fadeDisplay(true); // Fade the display back in
+                    }, 1000);
+                }
+            });
         }, 500);
     }
 
