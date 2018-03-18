@@ -94,21 +94,14 @@ var ccrouter = function()
     }    
 
 
-    var $dashboard_tabs = $(".dashboard-tab");
-    var resetTabContent = function()
-    {
-        $dashboard_tabs.removeClass("active");
-    }
 
     // Listens for hashchange events and refreshes the page
     this.listen = function()
     {
         window.onhashchange = function(e)
         {
-            resetTabContent(); // reset the tabs
             var hash = e.newURL.split('#')[1];
-            $("a[href='#" + hash + "'").find(".dashboard-tab").addClass("active");
-
+           
             if (extension == "")
                 load(routes_directory + hash);
             else
