@@ -30,7 +30,7 @@ bower install ccrouter
 
         router.initialize("Routes/", "html", {
             color:  "dodgerblue",
-            display: "#display"
+            display: "#display",
             height: "2",
             initial: "index"
         }); 

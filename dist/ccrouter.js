@@ -41,7 +41,7 @@ var ccrouter = function()
     {
         getLoaderHTML(properties);
 
-        display = document.querySelector(properties.display); // Select the display element from the query
+        display = document.getElementById(properties.display); // Select the display element from the query
         page_loader = document.getElementById("page-loader"); // Get the page loader
         routes_directory = routes_dir; // Set the routes directory
         extension = ext; // Initialize the extension
@@ -87,8 +87,8 @@ var ccrouter = function()
     var getLoaderHTML = function(properties)
     {
         if (properties.color == null) properties.color = "blue";
-
-        document.write('<div id="page-loader" style="display:block;opacity:1;position:fixed;width:100%;top:0;left:0;height:' + properties.height + 'px;background-color:white;transition:all 500ms;"><div id="loading-bar" class="bloom" style="width:0%;height:' + properties.height + 'px;background-color:' + properties.color + ';transition:all 500ms;"></div></div>');
+        var body = document.querySelector("body");
+        body.innerHTML = ('<div id="page-loader" style="display:block;opacity:1;position:fixed;width:100%;top:0;left:0;height:' + properties.height + 'px;background-color:white;transition:all 500ms;"><div id="loading-bar" class="bloom" style="width:0%;height:' + properties.height + 'px;background-color:' + properties.color + ';transition:all 500ms;"></div></div>') + body.innerHTML;
     }    
 
 
