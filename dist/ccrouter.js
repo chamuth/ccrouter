@@ -41,7 +41,7 @@ var ccrouter = function()
     {
         getLoaderHTML(properties);
 
-        display = document.getElementById(properties.display); // Select the display element from the query
+        display = document.querySelector(properties.display); // Select the display element from the query
         page_loader = document.getElementById("page-loader"); // Get the page loader
         routes_directory = routes_dir; // Set the routes directory
         extension = ext; // Initialize the extension
@@ -116,7 +116,7 @@ var ccrouter = function()
     }
 
     // Function which should be called right after visiting another route
-    var refreshPages = null;
+    var refreshPages = function() {}
     
     // Loads a url and returns the HTML content from it
     var load = function(url)

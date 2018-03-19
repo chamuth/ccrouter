@@ -3,6 +3,11 @@
     animation: 2s bloomingAnimation infinite;
 }
 
+#page-loader
+{
+    z-index:2000;
+}
+
 @keyframes bloomingAnimation
 {
     0% { opacity: 0.4 }
